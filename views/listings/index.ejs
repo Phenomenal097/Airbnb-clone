@@ -9,7 +9,7 @@
                 <div class="card-img-overlay"></div>
                 <div class="card-body">
                   <p class="card-text plus-jakarta-sans-font"><%= listing.title %> <br> 
-                    &#8377; <%=listing.price.toLocaleString("en-IN") %> / night<br>
+                    &#8377; <%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %>
                 </p>
                 </div>
               </div>
