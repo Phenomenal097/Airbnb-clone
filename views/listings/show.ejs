@@ -41,24 +41,26 @@
     <button class="btn btn-outline-dark">Submit</button>
   </form>
   <hr />
-  <p><b>All Reviews</b></p>
-<div class="row justify-content-center">
+<p><b>All Reviews</b></p>
+<div class="row">
   <% for (let review of listingData.reviews) { %>
-    <div class="col-md-5 ms-3 mb-3 d-flex justify-content-center">
-      <div class="card w-100">
-        <div class="card-body text-center">
+    <div class="col-md-6 mb-3 mt-3">
+      <div class="card h-100">
+        <div class="card-body text-center review-card">
           <h5 class="card-title">Abella</h5>
+          <div class="review-content">
           <p class="card-text"><%= review.comment %></p>
           <p class="card-text"><%= review.rating %> Stars</p>
-          <form action="/listings/<%= listingData._id %>/reviews/ <%= review._id %>?_method=DELETE" class="mb-3" method="POST">
+          <form action="/listings/<%= listingData._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
             <button class="btn btn-sm btn-dark">Delete</button>
           </form>
+        </div>
         </div>
       </div>
     </div>
   <% } %>
 </div>
-</div>
+
   
 
 
