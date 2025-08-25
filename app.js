@@ -11,10 +11,14 @@ const {listingSchema, reviewSchema} = require("./schema.js");
 const review = require("./models/review.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 
 //Routes
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
+const listingsRoute = require("./routes/listing.js");
+const reviewsRoute = require("./routes/review.js");
+const userRoute = require("./routes/user.js");
 
 main().then((res) => {
     console.log("The db connection is established");
@@ -43,17 +47,23 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 app.use((req,res,next) => {
-    res.locals.successMsg = req.flash("success");
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
     next();
 })
 
-
 //For common route
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", reviews);
-
+app.use("/listings", listingsRoute);
+app.use("/listings/:id/reviews", reviewsRoute);
+app.use("/", userRoute);
 
 app.get("/", (req,res) => {
     res.send("Home directory");
