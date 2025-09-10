@@ -59,4 +59,4 @@ Before you begin, make sure you have the following installed on your system:
 7. Access the project:
    - Once the server is running, you can access the project at [http://localhost:8080](http://localhost:8080).
 
-CREATED WITH LOVE BY SHANTANU JHA &hearts
+CREATED WITH LOVE BY SHANTANU JHA &hearts;
