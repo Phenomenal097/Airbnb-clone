@@ -1,6 +1,7 @@
 const Listing = require("../models/listing");
 const ExpressError = require("../utils/ExpressError.js");
 const { listingSchema } = require("../schema.js");
+const mapToken = process.env.RADAR_SECRET_KEY;
 
 module.exports.index = async (req, res) => {
     const allListings = await Listing.find({});
@@ -38,7 +39,8 @@ module.exports.createListing = async (req, res, next) => {
     await newListing.save();
     req.flash("success", "New Listing Created!");
     res.redirect("/listings");
-}
+};
+
 
 module.exports.renderEditForm = async (req, res) => {
     let {id} = req.params;
